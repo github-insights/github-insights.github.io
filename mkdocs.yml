@@ -1,4 +1,4 @@
 site_name: Github Metrics Docs
-site_url: https://github-insights.github.io/docs
+site_url: https://github-insights.github.io/site
 theme:
   name: material
