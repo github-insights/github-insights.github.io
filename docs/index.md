@@ -1,17 +1,7 @@
-# Welcome to MkDocs
+Welcome to the github-metrics wiki!
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+# Introduction - Thomas
 
-## Commands
+Have you ever had to view multiple Github actions at the same time over multiple projects? Github Metrics allows you to collect data from mulitple repositories into a single point of truth giving you insights into, workflow run results, run times, total count metrics and much more.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
