@@ -1,3 +1,5 @@
+# Github to Domain Mapping
+
 # Overview
 
 Since there are a lot of transformations happening from the github api to our internal `domain` model, here is a quick overview of it. The intermediary layer in the `github-adapter` serves to map the response json directly to java classes which then know how to transform themselves into actual `domain` classes. Aside from the whole classes, we are also mapping things like possible statuses. We do this because it reduces the cardinality of the resulting prometheus metric. Look below for more details.

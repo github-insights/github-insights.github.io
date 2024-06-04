@@ -1,3 +1,5 @@
+# Architecture
+
 # General
 
 We are using the Hexagonal arhitecture pattern but with a slight twist "screaming" which takes the concepts of hexagonal but flips the organization a little to make it more clear from the top level what each module is responsible for/does.
