@@ -1,4 +1,4 @@
-# Github to Domain Mapping
+# Api to Domain Mapping
 
 # Overview
 

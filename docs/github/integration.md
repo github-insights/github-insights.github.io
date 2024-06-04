@@ -1,4 +1,4 @@
-# Github Integration
+# Integration
 
 # Authorization - Henry
 Authorization is done via a Github App which authorizes access to repositories on the organization that it is installed on.
