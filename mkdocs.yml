@@ -2,8 +2,17 @@ site_name: Github Metrics Docs
 site_url: https://github-insights.github.io/site
 theme:
   name: material
+  palette: 
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 markdown_extensions:
   - attr_list
   - md_in_html
   - tables
-
+  - markdown_grid_tables

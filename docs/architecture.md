@@ -1,36 +1,106 @@
 # Architecture
 
-# General
-
-We are using the Hexagonal arhitecture pattern but with a slight twist "screaming" which takes the concepts of hexagonal but flips the organization a little to make it more clear from the top level what each module is responsible for/does.
-
-# Overview
-
-Before diving into the details of the architecture here is a quick overview of the current architecture. This drawing omits some details of the actual architecture but is still correct for the most part. 
-
-If not already clear from the drawing the general gist of it is the following. In the `domain` module a few different schedulers are defined. These schedulers call the the `github-adapter` through a caching layer and then export that data to `prometheus-exporter`. Both of these interactions between modules are managed through dependency injections allowing easy swapping of implementations. Additionally this is also true for the scheduling system.
+Before diving into the details of the architecture here is a quick overview of
+the current architecture. This drawing omits some details of the actual 
+architecture but is still correct for the most part. 
 
 <p align="center">
-    <img src="https://github.com/github-insights/github-metrics/assets/57358338/627b6f87-393a-471c-99fc-aecf75a1101d">
-    <em>Img 1</em>
+    <img
+        width="75%"
+        src="../images/architecture-overview-light.png#only-light"
+    />
+    <img 
+        width="75%"
+        src="../images/architecture-overview-dark.png#only-dark"
+    />
 </p>
 
-# Scheduling System
+## Overview
 
-As of this moment the scheduling is done through implementing [SchedulingConfigurer](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/annotation/SchedulingConfigurer.html). The schedule time is configured via environment variables.
+The project is based on a Hexagonal archtecture, this allows for the the **GitHub**
+and **Prometheus** specific code to live in its own adapters and exporters making
+the service easily extensible. Those two adapter and exporter implementations
+are built around a `domain` module.
+
+This also means that anything specific to the implementation of the adapter or
+the exporter is only present in each respective module and does not need to be
+considered from other modules. Examples would be that chaching requests is done
+in the `github-adapter` and not in the `domain`. 
 
 <p align="center">
-    <img src="https://github.com/github-insights/github-metrics/assets/57358338/60edeee2-9fee-46a3-b4c1-1bdc47e73b7a">
-<em>Img 2</em>
+    <img
+        width="100%"
+        src="../images/github-metrics-light.png#only-light"
+    />
+    <img 
+        width="100%"
+        src="../images/github-metrics-dark.png#only-dark"
+    />
 </p>
 
-# Caching
+## Domain
 
-Caching is done very simply through the `@Cachable` annotation of spring. This annotation is inserted on the implementation of the different providers (marked green in the images) and then caches the return of the function call under the specified key. The caching was initially implemented to avoid fetching the list of repositories too often but then ended up coming in handy for other things as well. When fetching jobs for example the workflow runs also need to be fetched, but since the workflow runs might have just been fetched that call is cached and will not cause an actual re-fetch, but we use the annotation @CacheEvict on the actual workflowRunsUseCase so that that it always grabs a fresh and accurate request.
+The domain exposes different use cases for getting the data from the adapter
+implementation. This data, although [modeled after the Github apis](github/api-to-domain-mapping.md)
+structure is not completly coupled to it and is already more generic then
+Github's. Fetching the data happens through implementations of the respective
+`...QueryPort` injected by spring.
 
-# Domain
-# Prometheus Exporter
-# Github Adapter
+Since much of the data depends on eachother, like Workflow Runs are part of a
+Repository, the use cases call eachother to fetch the nessesary data.
 
+## Prometheus Exporter
 
+Through the [Micrometer dependency](https://micrometer.io/) the prometheus exporter
+exposes its metrics on the `/actuator/prometheus` endpoint. Internally the exporter
+calls the domain's use cases transforming the returned data into a format that 
+is specific to each `Exporter` and then exposing it. 
 
+Each exporter runs on a scheduled interval to fetch new data. This interval
+can be very frequent since the exporter should not be concerned about source
+details like ratelimiting. The interval is nontheless configurable, you can
+find the possible configurations [here](configuration/configuration.md#exporters)
+
+<p align="center">
+    <img
+        width="100%"
+        src="../images/exporter-light.png#only-light"
+    />
+    <img 
+        width="100%"
+        src="../images/exporter-dark.png#only-dark"
+    />
+</p>
+
+## Github Adapter
+
+As mentioned in the [domain](#domain) section of this page, the adapter implementation
+should implement all `QueryPort`'s with which the data gets fetched. Our implementation
+uses [springs `RestClient`](https://docs.spring.io/spring-framework/reference/integration/rest-clients.html#rest-restclient)
+to do this making all the nessesary requests to fetch the data.
+
+<p align="center">
+    <img
+        width="100%"
+        src="../images/adapter-light.png#only-light"
+    />
+    <img 
+        width="100%"
+        src="../images/adapter-dark.png#only-dark"
+    />
+</p>
+
+### Reqeust Caching
+
+To avoid slamming the Api with thousands of requests the adapter uses [springs `@Cachable`](https://docs.spring.io/spring-framework/reference/integration/cache/annotations.html)
+annotation to cache function calls. This is especially important becuase a lot of use cases
+need the same data which would lead to a lot of unnessesary requests.
+
+#### Example
+
+The list of repositories is needed by almost all use cases. The number of
+workflow runs or the number of self hosted runners is repository specific, for this
+reason all these use cases will make a call to the `RepositoriesQueryPort` and
+fetch the nessesary data. But after the first call this result actually almost
+never changes. Here a cached result comes in handy since it avoids the high number
+of actual requests to the Api.
