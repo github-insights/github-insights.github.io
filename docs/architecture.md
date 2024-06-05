@@ -18,9 +18,9 @@ architecture but is still correct for the most part.
 ## Overview
 
 The project is based on a Hexagonal archtecture, this allows for the the **GitHub**
-and **Prometheus** specific code to live in its own adapters and exporters making
-the service easily extensible. Those two adapter and exporter implementations
-are built around a `domain` module.
+and **Prometheus** specific code to live in its own [adapters](#github-adapter) and 
+[exporters](#prometheus-exporter) making the service easily extensible. Those two
+adapter and exporter implementations are built around a `domain` module.
 
 This also means that anything specific to the implementation of the adapter or
 the exporter is only present in each respective module and does not need to be
@@ -89,6 +89,15 @@ to do this making all the nessesary requests to fetch the data.
         src="../images/adapter-dark.png#only-dark"
     />
 </p>
+
+### Mapping to Domain
+
+This topic is explored more in the [**Api to Domain Mapping**](github/api-to-domain-mapping.md)
+page but I thought I would mention a few things here. Each request response gets
+gets mapped to a `github-adapter` specific class which then knows how to turn
+itself into the relevant `domain` class. This allows the domain structure to be
+somewhat decoupled from Githubs internal structure and easy extension to other
+Github like Api's. For more details on this mapping go to [the above mentioned page](github/api-to-domain-mapping.md)
 
 ### Reqeust Caching
 
