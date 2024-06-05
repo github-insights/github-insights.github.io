@@ -15,4 +15,3 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - tables
-  - markdown_grid_tables
