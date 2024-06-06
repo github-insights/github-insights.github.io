@@ -1,5 +1,9 @@
 # Configuration
 
+## Authentication
+
+FIXME: add things
+
 ## Exporters
 
 These configs define on which schedule the exporters will run. Although configurable

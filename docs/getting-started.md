@@ -35,7 +35,13 @@ on your organization and generate a private key which is then used to set the
         </tr>
         <tr>
             <td>APP_GITHUB_APPLICATION_PEM</td>
-            <td>A private key generated through the installation of the Github App. This environement variable is just the whole `pem` string provided by Github</td>
+            <td>
+                A private key generated through the installation of the Github
+                App. This environement variable is just the whole <code>pem</code>
+                string provided by Github. For more information on how to create
+                this Github App check out the <a href="../github/authentication#setting-up-the-github-app">github authentication</a>
+                page.
+            </td>
         </tr>
     </tbody>
 </table>
