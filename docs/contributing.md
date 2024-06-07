@@ -48,7 +48,7 @@ then the specific Github one.
 
 - Gitlab
 - Bit Bucket
-- Travic CI
+- Travis CI
 - ... and more
 
 ### Exporters

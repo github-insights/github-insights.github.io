@@ -17,14 +17,14 @@ architecture but is still correct for the most part.
 
 ## Overview
 
-The project is based on a Hexagonal archtecture, this allows for the the **GitHub**
+The project is based on a Hexagonal architecture, this allows for the the **GitHub**
 and **Prometheus** specific code to live in its own [adapters](#github-adapter) and 
 [exporters](#prometheus-exporter) making the service easily extensible. Those two
 adapter and exporter implementations are built around a `domain` module.
 
 This also means that anything specific to the implementation of the adapter or
 the exporter is only present in each respective module and does not need to be
-considered from other modules. Examples would be that chaching requests is done
+considered from other modules. Examples would be that caching requests is done
 in the `github-adapter` and not in the `domain`. 
 
 <p align="center">
@@ -99,7 +99,7 @@ itself into the relevant `domain` class. This allows the domain structure to be
 somewhat decoupled from Githubs internal structure and easy extension to other
 Github like Api's. For more details on this mapping go to [the above mentioned page](github/api-to-domain-mapping.md)
 
-### Reqeust Caching
+### Request Caching
 
 To avoid slamming the Api with thousands of requests the adapter uses [springs `@Cachable`](https://docs.spring.io/spring-framework/reference/integration/cache/annotations.html)
 annotation to cache function calls. This is especially important becuase a lot of use cases

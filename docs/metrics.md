@@ -18,7 +18,7 @@ single frontend.
         <tr>
             <td>Repositories</td>
             <td><nobr><code>repositories_count</code></nobr></td>
-            <td>-</td>
+            <td><code>organization</code></td>
             <td>
                 All Repositories that the Github Installation token has access
                 to and exposes a total current count metric.
@@ -27,7 +27,10 @@ single frontend.
         <tr>
             <td rowspan=4>Workflow Runs</td>
             <td><nobr><code>workflow_runs</code></nobr></td>
-            <td rowspan=4><code>status</code> {DONE, IN_PROGRESS, PENDING, FAILED}</td>
+            <td>
+                <code>organization</code><br><br>
+                <br/><code>status</code> {DONE, IN_PROGRESS, PENDING, FAILED}
+            </td>
             <td>
                 For all Repositories retrieves all workflow runs from the start
                 of yesterday until time of export and display a count of them
@@ -37,12 +40,17 @@ single frontend.
         <tr>
             <td><nobr><code>active_workflow_runs</code></nobr></td>
             <td>
+                <code>organization</code><br><br>
+                <br/><code>status</code> {DONE, IN_PROGRESS, PENDING, FAILED}
+            </td>
+            <td>
                 For all Repositories all active workflow runs and display a 
                 count of them for every status.
             </td>
         </tr>
         <tr>
             <td><nobr><code>workflow_runs_total_build_times</code></nobr></td>
+            <code>organization</code>
             <td>
                 For all Repositories the total build time of the workflow runs
                 from the start of yesterday until the time of export.
@@ -50,6 +58,7 @@ single frontend.
         </tr>
         <tr>
             <td><nobr><code>workflow_runs_average_build_times</code></nobr></td>
+            <code>organization</code><br><br>
             <td>
                 For all Repositories the average build time of the workflow runs
                 from the start of yesterday until the time of export
@@ -59,6 +68,7 @@ single frontend.
             <td>Jobs</td>
             <td><nobr><code>workflow_run_jobs</code></nobr></td>
             <td>
+                <code>organization</code>
                 <code>status</code> {DONE, PENDING, IN_PROGRESS}<br><br>
                 <code>conclusion</code> {SUCCESS, FAILURE, ACTION_REQUIRED, NEUTRAL}
             </td>
@@ -73,7 +83,10 @@ single frontend.
                 <nobr><code>pull_requests_count_of_last_{X}_days</code></nobr>
                 {1,2,7,28,365}
             </td>
-            <td rowspan=2><code>state</code> {OPEN, CLOSED, MERGED}</td>
+            <td>
+                <code>organization</code><br><br>
+                <code>state</code> {OPEN, CLOSED, MERGED}
+            </td>
             <td>
                 For pull requests of the last days a count of each state
             </td>
@@ -84,13 +97,20 @@ single frontend.
                 {7,14,28,365}
             </td>
             <td>
+                <code>organization</code>
+            </td>
+            <td>
                 Merged Pull Requests per day over the period X
             </td>
         </tr>
         <tr>
             <td>Self Hosted Runners</td>
             <td><nobr><code>self_hosted_runners</code></nobr></td>
-            <td><code>os</code> {MAC_OS, LINUX, WINDOWS}<br><br><code>status</code> {OFFLINE, IDLE, BUSY}</td>
+            <td>
+                <code>organization</code>
+                <code>os</code> {MAC_OS, LINUX, WINDOWS}<br><br>
+                <code>status</code> {OFFLINE, IDLE, BUSY}
+            </td>
             <td>
                 For all selfhosted runners of the org/repos a count of their
                 Operating System and Status.

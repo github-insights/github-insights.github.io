@@ -7,7 +7,7 @@ FIXME: add things
 ## Exporters
 
 These configs define on which schedule the exporters will run. Although configurable
-this is not so influential on the programs performacne or lazency and should be
+this is not so influential on the programs performance or latency and should be
 kept on quite a quick schedule. Most of the schedule executions will only hit the
 caches. To change how often the Github Api is queried use the enviroment variables
 listed in the [cache eviction](#cache-eviction) section.
@@ -31,7 +31,6 @@ listed in the [cache eviction](#cache-eviction) section.
             <td><code>*/30 * * * * ?</code></td>
             <td>export schedule for workflow runs</td>
         </tr>
-    
         <tr>
             <td rowspan=2>Active Workflow Runs</td>
             <td colspan=3><code>EXPORTERS_SCHEDULING_ACTIVE_WORKFLOW_RUNS</code></td>
@@ -41,7 +40,6 @@ listed in the [cache eviction](#cache-eviction) section.
             <td><code>*/30 * * * * ?</code></td>
             <td>export schedule for active workflow runs</td>
         </tr>
-    
         <tr>
             <td rowspan=2>Jobs</td>
             <td colspan=3><code>EXPORTERS_SCHEDULING_JOBS</code></td>
@@ -51,7 +49,6 @@ listed in the [cache eviction](#cache-eviction) section.
             <td><code>*/30 * * * * ?</code></td>
             <td>export schedule for workflow jobs</td>
         </tr>
-    
         <tr>
             <td rowspan=2>Workflow Run Build Times</td>
             <td colspan=3><code>EXPORTERS_SCHEDULING_WORKFLOW_RUN_BUILD_TIMES</code></td>
@@ -61,7 +58,6 @@ listed in the [cache eviction](#cache-eviction) section.
             <td><code>45 */30 * * * ?</code></td>
             <td>export schedule for workflow build times</td>
         </tr>
-    
         <tr>
             <td rowspan=2>Pull Requests</td>
             <td colspan=3><code>EXPORTERS_SCHEDULING_PULL_REQUESTS</code></td>
@@ -71,7 +67,6 @@ listed in the [cache eviction](#cache-eviction) section.
             <td><code>30 */30 * * * ?</code></td>
             <td>export schedule for pull requests</td>
         </tr>
-    
         <tr>
             <td rowspan=2>Self Hosted Runners</td>
             <td colspan=3><code>EXPORTERS_SCHEDULING_SELF_HOSTED_RUNNERS</code></td>
@@ -81,7 +76,6 @@ listed in the [cache eviction](#cache-eviction) section.
             <td><code>*/30 * * * * ?</code></td>
             <td>export schedule for self hosted runners</td>
         </tr>
-    
         <tr>
             <td rowspan=2>Repository Count</td>
             <td colspan=3><code>EXPORTERS_SCHEDULING_REPOSITORY_COUNT</code></td>
@@ -91,7 +85,6 @@ listed in the [cache eviction](#cache-eviction) section.
             <td><code>*/30 * * * * ?</code></td>
             <td>export schedule for repository count</td>
         </tr>
-    
         <tr>
             <td rowspan=2>Rate Limit State</td>
             <td colspan=3><code>EXPORTERS_SCHEDULING_API_RATELIMIT_STATE</code></td>
@@ -106,14 +99,14 @@ listed in the [cache eviction](#cache-eviction) section.
 
 ## Cache eviction
 
-As mentioned above, this is the imporant part of the configuration. If you are
+As mentioned above, this is the important part of the configuration. If you are
 intending to make the request interval significantly faster or slower change the
 cron shedule to the corresponding shedule leading to the cache beeing evicted more
 or less often and new data being fetched more or less frequently.
 
 That said the rate limiter might stop you from making too many requests by setting
 its status to a specific level. But even here you get to control how this level
-influences the features. Each feture can set a level at which it will be turned
+influences the features. Each feature can set a level at which it will be turned
 off. The logic works in the following way (as pseudocode):
 
 ```
@@ -277,7 +270,7 @@ is ceased. The configured `enum string` can be one of:
 ## Rate Limiter
 
 First we have some basic variables that allow for some minor configurations. If
-you are not intending to get really into opimizing the service there should be
+you are not intending to get really into optimizing the service there should be
 no need to touch these.
 
 <table>
@@ -306,7 +299,7 @@ no need to touch these.
         <tr>
             <td>integer (seconds)</td>
             <td><code>60</code></td>
-            <td>Time that passes between each reevaluation of how many requests are being made, shorter time will make the rate limiter more sensitive to bursts and longer the inverse</td>
+            <td>Time that passes between each re-evaluation of how many requests are being made, shorter time will make the rate limiter more sensitive to bursts and longer the inverse</td>
         </tr> 
         <tr>
             <td rowspan=2>Ratelimit Buffer</td>
@@ -416,7 +409,7 @@ available.
         <tr>
             <td>boolean</td>
             <td><code>true</code></td>
-            <td>Collects data on all workflow runs created since yesterday 00:00, this includes workflow-runs of all statuses.</td>
+            <td>Collects data on all workflow runs of the last 24 hours, this includes workflow-runs of all statuses.</td>
         </tr>
         <tr>
             <td rowspan=2>Active Workflow Runs</td>
@@ -434,7 +427,7 @@ available.
         <tr>
             <td>boolean</td>
             <td><code>false</code></td>
-            <td>Collects data on all jobs of all the workflow-runs created since yesterday 00:00.</td>
+            <td>Collects data on all jobs of all the workflow-runs started in the last 24 hours.</td>
         </tr>
         <tr>
             <td rowspan=2>Repository Count</td>

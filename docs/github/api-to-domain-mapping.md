@@ -115,8 +115,8 @@ does not give a clear response then the `status` determines the final `WorkflowR
 ### Build Times
 
 Although a separate query, there is no separate object on the domain. Insead
-the apter sets the build time parameter on the domain after having done the query
-to the timing endpoing.
+the adapter sets the build time parameter on the domain after having done the query
+to the timing endpoint.
 
 <p align="center">
     <img
@@ -142,7 +142,7 @@ to the timing endpoing.
     />
 </p>
 
-Unlike Worklfow Runs, Jobs has the `conclusion` and `status` split up into two 
+Unlike Workflow Runs, Jobs has the `conclusion` and `status` split up into two 
 different enums. This should be changed in the future into one status to reduce
 complexity and coupling.
 
@@ -223,7 +223,7 @@ complexity and coupling.
 
 ## Pull Request
 
-The Pull Requests endpoint is currently the only endpoint that returns a array
+The Pull Requests endpoint is currently the only endpoint that returns an array
 on the root level which makes it a little different from the other response
 objects.
 

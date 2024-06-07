@@ -6,7 +6,7 @@ to get the service running. This configuration contains the following:
 <table>
     <thead>
         <tr style="background-color: lightgray;">
-            <th>environement variables</th>
+            <th>environment variables</th>
             <th>datatype</th>
             <th>description</th>
         </tr>
@@ -88,7 +88,7 @@ If you would like to collect any other metrics turn on the relevant features.
         <tr>
             <td>boolean</td>
             <td><code>false</code></td>
-            <td>Collects data on all jobs of all the workflow-runs created since yesterday 00:00.</td>
+            <td>Collects data on all jobs of all the workflow-runs created in the last 24 hours.</td>
         </tr>
         <tr>
             <td rowspan=2>Repository Count</td>
@@ -106,7 +106,7 @@ If you would like to collect any other metrics turn on the relevant features.
         <tr>
             <td>boolean</td>
             <td><code>false</code></td>
-            <td>Aggregates workflow-run build-times to both a total count as well as a average for all workflow-runs created since yesterday 00:00.</td>
+            <td>Aggregates workflow-run build-times to both a total count as well as a average for all workflow-runs created in the last 24 hours.</td>
         </tr>
         <tr>
             <td rowspan=2>Self Hosted Runners</td>
