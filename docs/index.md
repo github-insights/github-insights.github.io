@@ -17,6 +17,12 @@ and after setting the [minimal configuration](configuration/minimal-config.md) d
 of choice. The application will expose all metrics on the `/actuator/prometheus`
 endpoint. A more detailed step by step guide can be found [here](getting-started.md)
 
+## Contibruting
+
+This project is open source so all contributions are welcome. If you are not sure
+of what could be added we have a [page dedicated](contributing.md) to ideas and
+improvements to Github Metrics.
+
 ## Metrics
 
 Looking for a list of all exposed data, check out the [Metrics page](metrics.md).
